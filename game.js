@@ -229,13 +229,13 @@ class Game {
                 if (this.isCheckmate(this.turn)) {
                     this.gameOver = true;
                     this.renderBoard();
-                    this.updateStatus(`Checkmate! ${(this.turn === 'red' ? 'Black' : 'Red')} Wins!`);
+                    this.updateStatus(`將軍！${(this.turn === 'red' ? '黑方' : '紅方')}勝！`);
                     return;
                 }
             } else if (this.isStalemate(this.turn)) {
                 this.gameOver = true;
                 this.renderBoard();
-                this.updateStatus("Stalemate!");
+                this.updateStatus("和棋！");
                 return;
             }
 
