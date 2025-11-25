@@ -6,7 +6,6 @@ class Game {
         this.gameOver = false;
         this.ai = new AI(this);
         this.difficulty = 2;
-        this.bgmPlaying = false;
         this.initAudio();
     }
 
@@ -14,21 +13,19 @@ class Game {
         this.bgm = document.getElementById('bgm');
         this.captureSound = document.getElementById('capture-sound');
 
-        const musicBtn = document.getElementById('music-btn');
-        if (musicBtn) {
-            musicBtn.onclick = () => this.toggleMusic();
+        // Attempt autoplay
+        const playPromise = this.bgm.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Autoplay prevented. Waiting for user interaction.");
+                // Add one-time click listener to start music
+                const startMusic = () => {
+                    this.bgm.play();
+                    document.removeEventListener('click', startMusic);
+                };
+                document.addEventListener('click', startMusic);
+            });
         }
-    }
-
-    toggleMusic() {
-        if (this.bgmPlaying) {
-            this.bgm.pause();
-            document.getElementById('music-btn').textContent = "播放音樂";
-        } else {
-            this.bgm.play().catch(e => console.log("Audio play failed:", e));
-            document.getElementById('music-btn').textContent = "暫停音樂";
-        }
-        this.bgmPlaying = !this.bgmPlaying;
     }
 
     init() {
