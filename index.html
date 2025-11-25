@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中國象棋 (Chinese Chess)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="sidebar">
+            <h1>中國象棋</h1>
+            <div class="controls">
+                <button id="new-game-btn">新局</button>
+                <div class="difficulty-select">
+                    <label for="difficulty">難度:</label>
+                    <select id="difficulty">
+                        <option value="1">簡單</option>
+                        <option value="2" selected>普通</option>
+                        <option value="3">困難</option>
+                    </select>
+                </div>
+            </div>
+            <div id="status">紅方走棋</div>
+            <div id="log"></div>
+        </div>
+        <div class="board-container">
+            <div id="board" class="board">
+                <!-- Board grid and pieces will be generated here -->
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+    <script src="ai.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
