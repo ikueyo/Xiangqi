@@ -6,6 +6,29 @@ class Game {
         this.gameOver = false;
         this.ai = new AI(this);
         this.difficulty = 2;
+        this.bgmPlaying = false;
+        this.initAudio();
+    }
+
+    initAudio() {
+        this.bgm = document.getElementById('bgm');
+        this.captureSound = document.getElementById('capture-sound');
+
+        const musicBtn = document.getElementById('music-btn');
+        if (musicBtn) {
+            musicBtn.onclick = () => this.toggleMusic();
+        }
+    }
+
+    toggleMusic() {
+        if (this.bgmPlaying) {
+            this.bgm.pause();
+            document.getElementById('music-btn').textContent = "播放音樂";
+        } else {
+            this.bgm.play().catch(e => console.log("Audio play failed:", e));
+            document.getElementById('music-btn').textContent = "暫停音樂";
+        }
+        this.bgmPlaying = !this.bgmPlaying;
     }
 
     init() {
@@ -218,6 +241,12 @@ class Game {
                 const attackerEl = document.getElementById(piece.id);
                 if (attackerEl) attackerEl.classList.add('capturing');
                 setTimeout(() => attackerEl && attackerEl.classList.remove('capturing'), 300);
+
+                // Play capture sound
+                if (this.captureSound) {
+                    this.captureSound.currentTime = 0;
+                    this.captureSound.play().catch(e => console.log("Sound play failed:", e));
+                }
             }
 
             this.makeMove(fromR, fromC, toR, toC);

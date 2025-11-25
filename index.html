@@ -12,6 +12,7 @@
             <h1>中國象棋</h1>
             <div class="controls">
                 <button id="new-game-btn">新局</button>
+                <button id="music-btn">播放音樂</button>
                 <div class="difficulty-select">
                     <label for="difficulty">難度:</label>
                     <select id="difficulty">
@@ -30,6 +31,12 @@
             </div>
         </div>
     </div>
+    <audio id="bgm" loop>
+        <source src="bgm.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="capture-sound">
+        <source src="capture.mp3" type="audio/mpeg">
+    </audio>
     <script src="game.js"></script>
     <script src="ai.js"></script>
     <script src="script.js"></script>
